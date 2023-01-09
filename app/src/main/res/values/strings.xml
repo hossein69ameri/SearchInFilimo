@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FilimoSearch</string>
+    <string name="search">Search...</string>
 </resources>
