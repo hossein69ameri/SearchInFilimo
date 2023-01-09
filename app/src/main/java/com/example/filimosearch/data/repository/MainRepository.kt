@@ -8,8 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class MainRepository(private val apiServises: ApiServises) {
+class MainRepository @Inject constructor(private val apiServises: ApiServises) {
 
     suspend fun searchMovie(query: String): Flow<NetworkResult<ResponseSearch>> {
         return flow {
