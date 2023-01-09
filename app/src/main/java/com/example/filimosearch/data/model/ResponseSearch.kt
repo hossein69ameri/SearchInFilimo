@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseSearch(
     @SerializedName("data")
-    val `data`: List<Data?>?
+    val `data`: List<Data>?
 ) {
     data class Data(
         @SerializedName("attributes")

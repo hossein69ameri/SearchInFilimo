@@ -1,5 +1,6 @@
 package com.example.filimosearch.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.filimosearch.data.model.ResponseSearch
@@ -17,6 +18,7 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
 
     private val _stateResponse : MutableStateFlow<NetworkResult<ResponseSearch>?> = MutableStateFlow(null)
     val stateResponse = _stateResponse.asStateFlow()
+
 
     fun searchMovie(query : String) = viewModelScope.launch {
         mainRepository.searchMovie(query).collect{

@@ -61,6 +61,7 @@
         android:layout_marginHorizontal="9dp"
         android:layout_marginTop="7dp"
         android:ellipsize="end"
+        android:gravity="left"
         android:maxLines="1"
         android:drawablePadding="7dp"
         android:fontFamily="sans-serif-light"
@@ -89,19 +90,20 @@
     <!--More-->
     <TextView
         android:id="@+id/movieMoreTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="9dp"
         android:layout_marginTop="13dp"
+        android:drawablePadding="7dp"
         android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
         android:maxLines="1"
         android:text="More"
-        android:drawablePadding="7dp"
-        android:fontFamily="sans-serif-light"
         android:textSize="13sp"
-        android:gravity="center"
         app:drawableEndCompat="@drawable/ic_baseline_chevron_right_24"
         app:drawableTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/moviePosterCard"
         app:layout_constraintTop_toBottomOf="@id/movieYearTxt" />
 

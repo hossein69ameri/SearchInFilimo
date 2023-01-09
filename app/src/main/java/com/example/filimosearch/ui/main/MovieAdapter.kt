@@ -15,6 +15,7 @@ import javax.inject.Inject
 class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemMovieBinding
+    private var moviesList = emptyList<Data>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,12 +24,16 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Vie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //getItem from PagingDataAdapter
-        holder.bind(differ.currentList[position])
+        holder.bind(moviesList[position])
         //Not duplicate items
         holder.setIsRecyclable(false)
     }
 
-    override fun getItemCount() = differ.currentList.size
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemCount() = moviesList.size
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
 
@@ -48,15 +53,29 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Vie
         }
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Data>() {
-        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
-            return oldItem == newItem
-        }
+    fun setData(data: List<Data>) {
+        val moviesDiffUtil = NotesDiffUtils(moviesList, data)
+        val diffUtils = DiffUtil.calculateDiff(moviesDiffUtil)
+        moviesList = data
+        diffUtils.dispatchUpdatesTo(this)
     }
 
-    val differ = AsyncListDiffer(this, differCallback)
+    class NotesDiffUtils(private val oldItem: List<Data>, private val newItem: List<Data>) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int {
+            return oldItem.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newItem.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItem[oldItemPosition] === newItem[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItem[oldItemPosition] === newItem[newItemPosition]
+        }
+    }
 }
