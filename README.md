@@ -9,8 +9,6 @@ SearchInFilimo is a sample Android project using [Saba Android Assignment](https
 
 MVVM architecture
 
-Reactive pattern
-
 Android Architecture Components
 
 Kotlin Coroutines + Flow
