@@ -15,8 +15,6 @@ Android Architecture Components
 
 Kotlin Coroutines + Flow
 
-Single activity pattern
-
 Dependency injection
 
 # Tech Stacks
